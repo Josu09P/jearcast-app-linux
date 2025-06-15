@@ -1,0 +1,145 @@
+<nav
+  class="navbar navbar-expand-lg sticky-top border-bottom"
+  style="padding: 0 20px;"
+  id="navbar-top-color"
+>
+  <div
+    class="container-fluid d-flex flex-wrap justify-content-between align-items-center"
+  >
+    <!-- Logo -->
+    <span class="navbar-brand fw-semibold me-3">
+      <img src="/src/assets/img/logo-v3.png" width="90" alt="Logo" />
+    </span>
+    <button
+      class="btn"
+      id="toggle-sidebar-btn"
+      title="Ocultar menú"
+      style="background-color: aliceblue; margin-left: 20px;"
+    >
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <!-- Barra de búsqueda -->
+    <form
+      class="d-flex mx-auto flex-grow-1 justify-content-center order-3 order-lg-2 mt-2 mt-lg-0"
+      role="search"
+      style="max-width: 450px;"
+    >
+      <input
+        id="search-input"
+        class="form-control form-control-sm w-75 rounded-start-pill px-3"
+        type="search"
+        placeholder="Buscar..."
+        aria-label="Buscar"
+      />
+      <button
+        class="btn btn-outline-primary btn-sm rounded-end-pill px-3"
+        type="submit"
+      >
+        <i class="bi bi-search"></i>
+      </button>
+    </form>
+
+    <!-- Usuario y logout -->
+    <div class="d-flex align-items-center order-2 order-lg-3 mt-2 mt-lg-0">
+      <span class="me-3 text-muted" id="user-name-jearcastapp"></span>
+      <button
+        class="btn btn-sm"
+        id="logout-session-jearcastapp"
+        title="Cerrar sesión"
+      >
+        <i class="bi bi-door-closed"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+<script is:inline>
+  const swalScript = document.createElement("script");
+  swalScript.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11";
+  swalScript.onload = () => {
+    const elements = {
+      logoutBtn: document.getElementById("logout-session-jearcastapp"),
+      userName: document.getElementById("user-name-jearcastapp"),
+      toggleSidebarBtn: document.getElementById("toggle-sidebar-btn"),
+      sidebar: document.getElementById("navbar-left-color"),
+      searchForm: document.querySelector("form[role='search']"),
+      searchInput: document.getElementById("search-input"),
+      mainContent: document.getElementById("main-content"),
+    };
+
+    // Mostrar nombre de usuario
+    const userData = JSON.parse(localStorage.getItem("userJearCastaInfo") || "null");
+    elements.userName.textContent = (Array.isArray(userData) && userData.length && userData[0].name)
+      ? userData[0].name
+      : "Usuario";
+
+    // Aplicar estado guardado del sidebar
+    const sidebarState = localStorage.getItem("sidebarState") || "shown";
+    if (sidebarState === "hidden") {
+      elements.sidebar.classList.add("d-none");
+      elements.mainContent.classList.remove("col-md-9", "col-lg-10");
+      elements.mainContent.classList.add("col-12");
+    }
+
+    // Toggle sidebar
+    elements.toggleSidebarBtn.addEventListener("click", () => {
+      const isHidden = elements.sidebar.classList.toggle("d-none");
+
+      if (isHidden) {
+        elements.mainContent.classList.remove("col-md-9", "col-lg-10");
+        elements.mainContent.classList.add("col-12");
+        localStorage.setItem("sidebarState", "hidden");
+      } else {
+        elements.mainContent.classList.remove("col-12");
+        elements.mainContent.classList.add("col-md-9", "col-lg-10");
+        localStorage.setItem("sidebarState", "shown");
+      }
+    });
+
+    // Logout con SweetAlert
+    elements.logoutBtn.addEventListener("click", () => {
+      Swal.fire({
+        title: "¿Cerrar sesión?",
+        text: "Tu sesión se cerrará y volverás al login.",
+        icon: "question",
+        iconHtml: '<i class="bi bi-box-arrow-right" style="font-size: 2rem;"></i>',
+        showCancelButton: true,
+        confirmButtonText: "Sí",
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#e63946",
+        cancelButtonColor: "#6c757d",
+        background: "#f8f9fa",
+        color: "#212529",
+        padding: "2em",
+        customClass: {
+          popup: "rounded-4 shadow-lg",
+          title: "fw-bold fs-4",
+          confirmButton: "btn btn-danger px-4 py-2 me-2",
+          cancelButton: "btn btn-secondary px-4 py-2",
+        },
+        buttonsStyling: false,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem("userJearCastaInfo");
+          window.location.href = "/auth/LoginPage";
+        }
+      });
+    });
+
+    // Búsqueda
+    elements.searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = elements.searchInput.value.trim();
+      if (query) {
+        console.log("Buscando:", query);
+      }
+    });
+  };
+  document.head.appendChild(swalScript);
+</script>
+
+<style>
+  nav.navbar {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+</style>

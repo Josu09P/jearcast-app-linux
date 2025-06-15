@@ -1,0 +1,51 @@
+---
+// En tu archivo .astro principal del dashboard
+import BaseHead from "../components/BaseHead.astro";
+import HeaderLeft from "../components/HeaderLeft.astro";
+import HeaderTop from "../components/HeaderTop.astro";
+import FooterDashboard from "../components/FooterDashboard.astro";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <BaseHead />
+  <body>
+    <!-- Contenedor general -->
+    <div class="container-fluid px-0">
+      
+      <!-- Header superior fijo y de ancho completo -->
+      <HeaderTop />
+
+      <!-- Contenido dividido en dos columnas en pantallas grandes -->
+      <div class="row g-0">
+        
+        <!-- Sidebar (oculto en mobile, visible en md en adelante) -->
+        <div class="col-md-3 col-lg-2 d-none d-md-block">
+          <HeaderLeft />
+        </div>
+
+        <!-- Contenido principal -->
+       <div id="main-content" class="col-12 col-md-9 col-lg-10 p-4">
+          <main class="container-fluid">
+            <slot />
+          </main>
+          <FooterDashboard />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function logout() {
+        localStorage.removeItem("userJearCastaInfo");
+        window.location.href = "/auth/LoginPage";
+      }
+    </script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<style>
+    #navbar-left-color a {
+        color: black !important;
+    }
+</style>

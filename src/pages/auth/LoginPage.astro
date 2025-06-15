@@ -1,0 +1,66 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+---
+
+<!doctype html>
+<html lang="es">
+  <BaseHead />
+  <body class="d-flex align-items-center justify-content-center bg-light" style="min-height: 100vh;">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+              <h2 class="card-title text-center mb-4 fw-bold">🎧 Iniciar Sesión</h2>
+              <form id="loginForm">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="usuario@ejemplo.com"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="********"
+                    required
+                  />
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary">
+                    Iniciar Sesión
+                  </button>
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                <small>¿Olvidaste tu contraseña?</small><br />
+                <a href="/auth/forgot-password" class="text-decoration-none">Recuperarla</a>
+              </div>
+              <div class="text-center mt-3">
+                <small>¿No tienes cuenta?</small><br />
+                <a href="/auth/RegisterPage" class="text-decoration-none">Registrarse</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/scripts/LoginUserScript.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+</style>

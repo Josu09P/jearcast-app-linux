@@ -1,0 +1,106 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+---
+
+<!doctype html>
+<html lang="es">
+  <BaseHead />
+  <body
+    class="d-flex align-items-center justify-content-center bg-light"
+    style="min-height: 100vh;"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h2 class="card-title text-center mb-4">Crear cuenta</h2>
+              <form id="register-form">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nombre completo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Ingresa tu nombre"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >Correo electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="ejemplo@email.com"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Mínimo 6 caracteres"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label"
+                    >Confirmar contraseña</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmPassword"
+                    placeholder="Repite tu contraseña"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="apikeyYoutube" class="form-label"
+                    >API Key de YouTube</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="apikeyYoutube"
+                    placeholder="Ingresa tu API Key de YouTube"
+                    required
+                  />
+                  <div class="form-text">
+                    Esta clave será usada para realizar búsquedas de videos.
+                  </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-success"
+                    >Registrarme</button
+                  >
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                ¿Ya tienes una cuenta?
+                <a href="/auth/LoginPage" class="text-primary"
+                  >Inicia sesión aquí</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/scripts/RegisterUserScript.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+</style>

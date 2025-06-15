@@ -1,11 +1,111 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="es">
+  <BaseHead />
+  <body class="d-flex flex-column min-vh-100 text-dark">
+    <Header />
+    <br />
+    <main
+      class="container mt-3"
+      style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;"
+    >
+      <!-- Botón de saltar -->
+      <div class="text-end mb-4">
+        <a href="/auth/LoginPage" class="btn btn-outline-primary btn-sm">
+          Saltar todo esto e iniciar sesión →
+        </a>
+      </div>
+
+      <!-- Sección: Procedimiento / Bienvenida -->
+      <section class="mb-5">
+        <div class="text-center">
+          <h1 class="display-5 fw-bold">Bienvenido a JearCast</h1>
+          <p class="lead">
+            JearCast es una aplicación de escritorio para Linux que permite
+            escuchar música desde YouTube usando tu propia API Key. Diseñada
+            para brindarte una experiencia moderna, rápida y sin interrupciones,
+            similar a Spotify.
+          </p>
+        </div>
+      </section>
+
+      <!-- Sección: Guía de instalación -->
+      <section id="guia" class="mb-5">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h2 class="h4 mb-3">📄 Guía para instalar JearCast</h2>
+            <p>
+              Hemos preparado un documento completo con todos los pasos
+              necesarios para obtener tu propia clave de API de YouTube,
+              configurar tu cuenta y comenzar a escuchar tu música favorita.
+            </p>
+            <a href="/guia/Guia_JearCast.pdf" class="btn btn-primary" download>
+              <i class="bi bi-file-earmark-arrow-down"></i> Descargar Guía (PDF)
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Apoyar -->
+      <section id="apoyar" class="mb-5">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <!-- Columna izquierda: texto -->
+              <div class="col-md-8">
+                <h2 class="h4 mb-3">🤝 Apoya al desarrollador</h2>
+                <p>
+                  Si este proyecto te gusta o te resulta útil, puedes apoyar su
+                  desarrollo. Aceptamos contribuciones voluntarias a través de
+                  medios confiables como:
+                </p>
+                <ul class="list-unstyled">
+                  <li><strong>Yape:</strong> 987 654 321</li>
+                  <li><strong>BCP:</strong> 123-45678901-0-23</li>
+                  <li>
+                    <strong>Paypal:</strong>
+                    <a href="#" target="_blank"
+                      >paypal.me/jearcast</a
+                    >
+                  </li>
+                  <li>
+                    <strong>Contacto directo:</strong> soporte@jearcast.dev
+                  </li>
+                </ul>
+                <p class="text-muted small mt-3">
+                  ¡Gracias por ser parte de la comunidad Linuxera! 🐧🎶
+                </p>
+              </div>
+
+              <!-- Columna derecha: video -->
+              <div class="col-md-4 d-flex justify-content-center">
+                <video
+                  class="rounded shadow-sm"
+                  width="300"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                >
+                  <source
+                    src="/src/assets/video/tanks-cat.mp4"
+                    type="video/mp4"
+                  />
+                  Tu navegador no soporta video HTML5.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <br />
+    <Footer />
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
