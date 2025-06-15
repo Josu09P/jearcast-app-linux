@@ -1,48 +1,70 @@
-# Astro Starter Kit: Basics
+# JEARCAST - APP
 
-```sh
-npm create astro@latest -- --template basics
-```
+## Descripción general
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Jear Cast es una aplicación de escritorio desarrollada con el objetivo de brindar a los usuarios una experiencia moderna y limpia para escuchar música desde YouTube, similar a plataformas como Spotify. Utiliza la API de YouTube mediante una clave personal (API Key) proporcionada por el usuario, siguiendo el enfoque del conocido reproductor Headset.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Este proyecto está pensado especialmente para usuarios de Linux, ofreciendo una interfaz fluida, un sistema de favoritos y playlists personalizados, autenticación de usuarios y funciones sociales. Además, será un proyecto de código abierto distribuido libremente a la comunidad.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Tecnologías Utilizadas
 
-## 🚀 Project Structure
+| Categorías | Tecnologías | Descripción |
+|------------|-------------|-------------|
+| Frontend | Astro | Framework moderno basado en Node.js que permite trabajar con TypeScript, JavaScript, Bootstrap, HTML y CSS para crear interfaces eficientes y optimizadas. |
+| Backend/AppDesktop | Electron + Node.js | Empaquetado de la aplicación como software de escritorio multiplataforma. |
+| Autenticación | Firebase Authentication | Registro e inicio de sesión mediante correo electrónico y contraseña. |
+| Base de datos | Firebase Firestore Database | Almacenamiento de usuario y sus claves API, playlists, favoritos y configuraciones personalizadas. |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Diseño y Experiencia de Usuario
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Para agilizar el desarrollo y mantener una estructura visual coherente, se utiliza el framework Astro en combinación con Bootstrap y TailwindCSS. Esto permite construir una interfaz moderna, ligera y responsive.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Autenticación y Seguridad
 
-## 🧞 Commands
+1. Al iniciar la aplicación, el usuario podrá registrarse o iniciar sesión utilizando su correo electrónico y contraseña (Firebase Auth).
+2. Al autenticarse, se le solicitará su propia API Key de YouTube, la cual se almacenará de forma segura en Firestore, asociada a su cuenta.
+3. Se incluirá una advertencia de responsabilidad para informar al usuario sobre los términos de uso de la API de YouTube.
 
-All commands are run from the root of the project, from a terminal:
+## Flujo de Uso
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Pantalla de Bienvenida
+- Introducción sobre el uso de la aplicación.
+- Enlaces directos e imágenes que explican cómo obtener una YouTube API Key.
+- Sección opcional de donaciones, con métodos visibles (Yape, BCP, PayPal, Lemon Cash, contacto directo).
+- Botón para "Saltar y continuar".
 
-## 👀 Want to learn more?
+### Autenticación
+- Registro o inicio de sesión mediante correo y contraseña.
+- Ingreso de la API Key personal.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Pantalla Principal
+- Dashboard musical interactivo.
+- Buscador de canciones/videos mediante la YouTube Data API.
+
+#### Secciones
+- Música (buscador)
+- Favoritos
+- Playlists
+- Reporte de errores (bugs)
+- Configuración
+
+## Consideraciones Técnicas
+- Reproducción de música se realizará a través de `<iframe>` de YouTube embebido, cumpliendo con las políticas de uso de la plataforma.
+- No se descargará contenido, ni se reproducirá directamente el audio sin la interfaz oficial de YouTube.
+- Cada usuario usará su propia API Key, cumpliendo así con los Términos de Servicio de la YouTube API.
+
+## Código Abierto
+- Este proyecto será totalmente open source y estará disponible gratuitamente para la comunidad.
+- Se invita a desarrolladores, músicos y entusiastas de Linux a colaborar o mejorar el sistema.
+- Repositorio: [Josu09P](LINK-DIRECTO)
+
+## Contacto y Apoyo
+
+Si deseas apoyar el desarrollo, puedes hacerlo mediante donaciones voluntarias:
+
+- Yape: 965634940
+- BCP:
+- Paypal:
+- Lemon Cash:
+- Contacto directo: +51 965634940
+- Correo: jearcast@gmail.com
