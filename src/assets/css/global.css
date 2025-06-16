@@ -1,0 +1,165 @@
+@media (min-width: 1400px) {
+    .col-xl-1-5-custom {
+        flex: 0 0 auto;
+        width: 12.5%;
+        /* 100 / 8 = 12.5% → 8 tarjetas por fila */
+    }
+}
+
+.video-card-custom {
+    background-color: rgba(255, 255, 255, 0.169);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.video-card-custom:hover {
+    transform: scale(1.01);
+    background-color: rgba(104, 114, 184, 0.545);
+}
+
+.video-card-custom button {
+    background-color: rgba(224, 0, 0, 0.1);
+    border: none;
+    color: #c2c2c2;
+    transition: background-color 0.2s ease;
+}
+
+.video-card-custom button:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/*  PAR EL CONTENDOR DE RERODUCCION*/
+.container-player-jear {
+    background-color: rgba(94, 109, 122, 0.824);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.custom-player-wrapper {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.custom-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    text-align: center;
+    z-index: 2;
+}
+
+.controls-jear button {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 1rem;
+}
+
+.overlay-blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+  pointer-events: auto;
+  border-radius: 1rem;
+}
+
+.overlay-blocker.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Contenedor del reproductor centrado */
+.video-wrapper {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  margin: 0 auto; /* centrar */
+  overflow: hidden;
+}
+
+/* Estilo del iframe */
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 1rem;
+}
+
+
+
+.custom-controls button {
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-controls-horizontal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #ccc;
+  border-radius: 3px;
+  appearance: none;
+  accent-color: #198754; /* verde Bootstrap */
+  cursor: pointer;
+}
+
+#progress-bar::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #198754;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+
+/* Botón de volumen con slider oculto */
+.volume-wrapper {
+  position: relative;
+}
+
+.volume-icon {
+  font-size: 1.3rem;
+  color: white;
+  cursor: pointer;
+}
+
+.volume-slider {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%) rotate(270deg);
+  width: 100px;
+  display: none;
+}
+
+.volume-wrapper:hover .volume-slider {
+  display: block;
+}

@@ -7,16 +7,15 @@ import Header from "../components/Header.astro";
 <!doctype html>
 <html lang="es">
   <BaseHead />
-  <body class="d-flex flex-column min-vh-100 text-dark">
+  <body class="d-flex flex-column min-vh-100">
     <Header />
     <br />
     <main
       class="container mt-3"
-      style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;"
     >
       <!-- Botón de saltar -->
       <div class="text-end mb-4">
-        <a href="/auth/LoginPage" class="btn btn-outline-primary btn-sm">
+        <a href="/auth/LoginPage" class="btn btn-outline-primary btn-sm text-light">
           Saltar todo esto e iniciar sesión →
         </a>
       </div>
@@ -24,8 +23,8 @@ import Header from "../components/Header.astro";
       <!-- Sección: Procedimiento / Bienvenida -->
       <section class="mb-5">
         <div class="text-center">
-          <h1 class="display-5 fw-bold">Bienvenido a JearCast</h1>
-          <p class="lead">
+          <h1 class="display-5 fw-bold" style="color: #f4f4f4;">Bienvenido a JearCast</h1>
+          <p class="lead" style="color: #f4f4f4;">
             JearCast es una aplicación de escritorio para Linux que permite
             escuchar música desde YouTube usando tu propia API Key. Diseñada
             para brindarte una experiencia moderna, rápida y sin interrupciones,
@@ -36,7 +35,7 @@ import Header from "../components/Header.astro";
 
       <!-- Sección: Guía de instalación -->
       <section id="guia" class="mb-5">
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0" style="background-color: #6b6b6b85; border-radius: 1rem; color:#f4f4f4">
           <div class="card-body">
             <h2 class="h4 mb-3">📄 Guía para instalar JearCast</h2>
             <p>
@@ -53,7 +52,7 @@ import Header from "../components/Header.astro";
 
       <!-- Sección: Apoyar -->
       <section id="apoyar" class="mb-5">
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0" style="background-color: #6b6b6b85; border-radius: 1rem; color:#f4f4f4">
           <div class="card-body">
             <div class="row align-items-center">
               <!-- Columna izquierda: texto -->
@@ -77,7 +76,7 @@ import Header from "../components/Header.astro";
                     <strong>Contacto directo:</strong> soporte@jearcast.dev
                   </li>
                 </ul>
-                <p class="text-muted small mt-3">
+                <p class="small mt-3" style="color: #f4f4f4;">
                   ¡Gracias por ser parte de la comunidad Linuxera! 🐧🎶
                 </p>
               </div>
@@ -85,12 +84,13 @@ import Header from "../components/Header.astro";
               <!-- Columna derecha: video -->
               <div class="col-md-4 d-flex justify-content-center">
                 <video
-                  class="rounded shadow-sm"
+                  class="rounded"
                   width="300"
                   autoplay
                   loop
                   muted
                   playsinline
+                  style="box-shadow: 0 0 5px rgba(206, 206, 206, 0.872);"
                 >
                   <source
                     src="/src/assets/video/tanks-cat.mp4"
@@ -109,3 +109,20 @@ import Header from "../components/Header.astro";
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+<style>
+  body {
+    background-image: url(/src/assets/img/bg-hero.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #102c4a ;
+  }
+
+  main.container {
+    background-color: #76767651; 
+    padding: 20px; 
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+</style>

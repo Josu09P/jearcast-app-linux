@@ -1,9 +1,10 @@
 ---
 // En tu archivo .astro principal del dashboard
 import BaseHead from "../components/BaseHead.astro";
+import FooterDashboard from "../components/FooterDashboard.astro";
 import HeaderLeft from "../components/HeaderLeft.astro";
 import HeaderTop from "../components/HeaderTop.astro";
-import FooterDashboard from "../components/FooterDashboard.astro";
+import "/src/assets/css/global.css"
 ---
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@ import FooterDashboard from "../components/FooterDashboard.astro";
           <main class="container-fluid">
             <slot />
           </main>
-          <FooterDashboard />
+        <FooterDashboard />
         </div>
       </div>
     </div>
@@ -45,6 +46,19 @@ import FooterDashboard from "../components/FooterDashboard.astro";
 </html>
 
 <style>
+html,
+body {
+  height: 100%;
+}
+
+ body {
+    background-color: #102c4a;
+    background-image: url('/src/assets/img/bg-hero.png');
+    background-repeat: no-repeat;
+    background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* Opcional: fija la imagen de fondo al viewport */
+}
     #navbar-left-color a {
         color: black !important;
     }
