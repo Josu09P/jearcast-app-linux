@@ -5,13 +5,15 @@ import BaseHead from "../../components/BaseHead.astro";
 <!doctype html>
 <html lang="es">
   <BaseHead />
-  <body class="d-flex align-items-center justify-content-center bg-light" style="min-height: 100vh;">
+  <body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="container py-5">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-          <div class="card shadow-sm border-0">
+          <div class="card shadow-sm">
             <div class="card-body p-4">
-              <h2 class="card-title text-center mb-4 fw-bold">🎧 Iniciar Sesión</h2>
+              <h2 class="card-title text-center mb-4 fw-bold">
+                <img src="/src/assets/img/logo-v3.png" alt="" width="80" style="filter: brightness(0) invert(1); margin-bottom: 10px;">
+                <br>Iniciar Sesión</h2>
               <form id="loginForm">
                 <div class="mb-3">
                   <label for="email" class="form-label">Correo Electrónico</label>
@@ -62,5 +64,19 @@ import BaseHead from "../../components/BaseHead.astro";
   html,
   body {
     height: 100%;
+    background-image: url(/src/assets/img/bg-hero.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #102c4a;
+  }
+  .card {
+    background-color: #5c616544;
+    border-radius: 1rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: white;
+    padding: 10px;
+
   }
 </style>

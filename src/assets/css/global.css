@@ -1,67 +1,146 @@
-@media (min-width: 1400px) {
-    .col-xl-1-5-custom {
-        flex: 0 0 auto;
-        width: 12.5%;
-        /* 100 / 8 = 12.5% → 8 tarjetas por fila */
-    }
+/* ======================================
+                 COLORES 
+====================================== */
+:root {
+  --primary-bg: rgba(255, 255, 255, 0.169);
+  --hover-bg: rgba(104, 114, 184, 0.545);
+  --overlay-bg: rgba(20, 20, 20, 0.7);
+  --overlay-block-bg: rgb(0, 0, 0);
+  --player-bg: rgba(94, 109, 122, 0.824);
+  --bootstrap-green: #198754;
+  --button-bg: rgba(224, 0, 0, 0.1);
+  --button-hover-bg: rgba(0, 0, 0, 0.15);
+  --text-color: #ffffff;
+  --text-secondary: #c2c2c2;
 }
 
+/* ======================================
+             ESTRUCTURA GENERAL 
+====================================== */
+.player-layout-wrapper {
+  height: 50vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container-player-jear {
+  background-color: rgba(26, 26, 26, 0.435);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0 !important;
+}
+
+/* ======================================
+            VIDEO (iframe) 
+====================================== */
+.video-wrapper {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-wrapper-half {
+  width: 50%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+}
+
+.video-wrapper-half iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+}
+
+/* ======================================
+            TARJETAS DE VIDEO 
+====================================== */
 .video-card-custom {
-    background-color: rgba(255, 255, 255, 0.169);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    color: white;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+  background-color: var(--primary-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
 .video-card-custom:hover {
-    transform: scale(1.01);
-    background-color: rgba(104, 114, 184, 0.545);
+  transform: scale(1.01);
+  background-color: var(--hover-bg);
 }
 
 .video-card-custom button {
-    background-color: rgba(224, 0, 0, 0.1);
-    border: none;
-    color: #c2c2c2;
-    transition: background-color 0.2s ease;
+  background-color: var(--button-bg);
+  border: none;
+  color: var(--text-secondary);
+  transition: background-color 0.2s ease;
 }
 
 .video-card-custom button:hover {
-    background-color: rgba(0, 0, 0, 0.15);
+  background-color: var(--button-hover-bg);
 }
 
-/*  PAR EL CONTENDOR DE RERODUCCION*/
-.container-player-jear {
-    background-color: rgba(94, 109, 122, 0.824);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+/* ======================================
+            COLUMNA RESPONSIVA 
+====================================== */
+@media (min-width: 1400px) {
+  .col-xl-1-5-custom {
+    flex: 0 0 auto;
+    width: 12.5%; /* 100 / 8 = 12.5% */
+  }
 }
 
-.custom-player-wrapper {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+@media (max-width: 1199px) {
+  .col-xl-1-5-custom {
+    width: 16.6667%; /* 6 columnas */
+  }
 }
 
+@media (max-width: 991px) {
+  .col-xl-1-5-custom {
+    width: 25%; /* 4 columnas */
+  }
+}
+
+@media (max-width: 767px) {
+  .col-xl-1-5-custom {
+    width: 50%; /* 2 columnas */
+  }
+}
+
+@media (max-width: 575px) {
+  .col-xl-1-5-custom {
+    width: 100%; /* 1 columna */
+  }
+}
+
+/* ======================================
+          OVERLAY / BLOQUEO 
+====================================== */
 .custom-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(20, 20, 20, 0.7);
-    backdrop-filter: blur(4px);
-    padding: 2rem;
-    text-align: center;
-    z-index: 2;
-}
-
-.controls-jear button {
-    min-width: 36px;
-    min-height: 36px;
-    font-size: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg);
+  backdrop-filter: blur(4px);
+  padding: 2rem;
+  text-align: center;
+  z-index: 2;
 }
 
 .overlay-blocker {
@@ -70,39 +149,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.8);
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out, backdrop-filter 3s ease-in-out;
+  backdrop-filter: blur(19px);
   opacity: 1;
   pointer-events: auto;
-  border-radius: 1rem;
+  z-index: 1;
 }
 
-.overlay-blocker.fade-out {
+.overlay-blocker.transparent {
   opacity: 0;
-  pointer-events: none;
+  backdrop-filter: blur(0px);
 }
 
-/* Contenedor del reproductor centrado */
-.video-wrapper {
-  position: relative;
-  width: 300px;
-  aspect-ratio: 16 / 9;
-  border-radius: 1rem;
-  margin: 0 auto; /* centrar */
-  overflow: hidden;
-}
-
-/* Estilo del iframe */
-.video-wrapper iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 1rem;
-}
-
-
-
+/* ======================================
+              CONTROLES 
+====================================== */
 .custom-controls button {
   font-size: 1.2rem;
   width: 40px;
@@ -120,13 +181,23 @@
   gap: 1.5rem;
 }
 
+.controls-jear button {
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 1rem;
+}
+
+/* ======================================
+         SLIDER DE PROGRESO 
+====================================== */
 #progress-bar {
   width: 100%;
+  max-width: 300px;
   height: 6px;
   background-color: #ccc;
   border-radius: 3px;
   appearance: none;
-  accent-color: #198754; /* verde Bootstrap */
+  accent-color: var(--bootstrap-green);
   cursor: pointer;
 }
 
@@ -134,15 +205,18 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #198754;
+  background: var(--bootstrap-green);
   cursor: pointer;
   -webkit-appearance: none;
 }
 
-
-/* Botón de volumen con slider oculto */
+/* ======================================
+           VOLUMEN SLIDER
+====================================== */
 .volume-wrapper {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .volume-icon {
@@ -152,14 +226,50 @@
 }
 
 .volume-slider {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%) rotate(270deg);
-  width: 100px;
-  display: none;
+  width: 100px; /* Ajusta el ancho según lo que necesites */
+  height: 5px; /* Ajusta la altura según lo que necesites */
+  appearance: none;
+  -webkit-appearance: none;
+  background: #654b4b;
+  outline: none;
+  border-radius: 5px;
 }
 
-.volume-wrapper:hover .volume-slider {
-  display: block;
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid #007bff;
+}
+
+/* Mejora para móviles */
+@media (hover: none) {
+  .volume-slider {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ======================================
+           PANEL DE INFORMACIÓN 
+====================================== */
+.player-controls-half {
+  width: 50%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: rgba(37, 37, 37, 0.55) !important;
+  border-radius: 5px;
+  color: white;
+  overflow-y: auto;
+}
+
+.player-title {
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
 }

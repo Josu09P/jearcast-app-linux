@@ -6,7 +6,7 @@ import BaseHead from "../../components/BaseHead.astro";
 <html lang="es">
   <BaseHead />
   <body
-    class="d-flex align-items-center justify-content-center bg-light"
+    class="d-flex align-items-center justify-content-center"
     style="min-height: 100vh;"
   >
     <div class="container">
@@ -14,7 +14,9 @@ import BaseHead from "../../components/BaseHead.astro";
         <div class="col-md-6 col-lg-5">
           <div class="card shadow-sm">
             <div class="card-body">
-              <h2 class="card-title text-center mb-4">Crear cuenta</h2>
+              <h2 class="card-title text-center mb-4">
+                 <img src="/src/assets/img/logo-v3.png" alt="" width="80" style="filter: brightness(0) invert(1); margin-bottom: 10px;">
+                 <br> Crear cuenta</h2>
               <form id="register-form">
                 <div class="mb-3">
                   <label for="name" class="form-label">Nombre completo</label>
@@ -71,13 +73,13 @@ import BaseHead from "../../components/BaseHead.astro";
                     placeholder="Ingresa tu API Key de YouTube"
                     required
                   />
-                  <div class="form-text">
+                  <div class="form-text text-light">
                     Esta clave será usada para realizar búsquedas de videos.
                   </div>
                 </div>
 
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-success"
+                  <button type="submit" class="btn btn-primary"
                     >Registrarme</button
                   >
                 </div>
@@ -102,5 +104,19 @@ import BaseHead from "../../components/BaseHead.astro";
   html,
   body {
     height: 100%;
+    background-image: url(/src/assets/img/bg-hero.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #102c4a;
+  }
+  .card {
+    background-color: #5c616544;
+    border-radius: 1rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: white;
+    padding: 15px;
+
   }
 </style>

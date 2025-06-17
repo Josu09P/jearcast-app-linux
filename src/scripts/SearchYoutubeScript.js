@@ -68,38 +68,79 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const setupCustomControls = () => {
+    const setupCustomControls = () => {
     const playBtn = document.getElementById("btn-play");
     const pauseBtn = document.getElementById("btn-pause");
     const nextBtn = document.getElementById("btn-next");
     const prevBtn = document.getElementById("btn-prev");
     const progressBar = document.getElementById("progress-bar");
     const equalizer = document.getElementById("music-equalizer");
-
+    const overlay = document.querySelector(".overlay-blocker");
+  
+    let fadeCheckInterval;
+  
+    const checkOverlayFade = () => {
+      if (!ytPlayer || typeof ytPlayer.getCurrentTime !== "function") return;
+  
+      const currentTime = ytPlayer.getCurrentTime();
+      const duration = ytPlayer.getDuration();
+  
+      if (!duration || duration === 0) return;
+  
+      // Mostrar oscuro hasta los 7 segundos
+      if (currentTime <= 7) {
+        overlay?.classList.remove("transparent");
+      }
+  
+      // Aclarar desde los 7 segundos hasta faltando 17
+      if (currentTime > 7 && currentTime < duration - 17) {
+        overlay?.classList.add("transparent");
+      }
+  
+      // Volver a oscurecer cuando faltan 17 segundos
+      if (currentTime >= duration - 17) {
+        overlay?.classList.remove("transparent");
+      }
+    };
+  
+    fadeCheckInterval = setInterval(checkOverlayFade, 1000);
+  
     playBtn?.addEventListener("click", () => {
       ytPlayer.playVideo();
       equalizer?.classList.remove("d-none");
+  
+      // Cuando se reproduce, espera 10 segundos antes de hacer el overlay transparente
+      setTimeout(() => {
+        if (overlay) {
+          overlay.classList.add("transparent");
+        }
+      }, 10000); // 10 segundos
     });
-
+  
     pauseBtn?.addEventListener("click", () => {
       ytPlayer.pauseVideo();
       equalizer?.classList.add("d-none");
+  
+      // Cuando se pausa, haz el overlay visible de inmediato
+      if (overlay) {
+        overlay.classList.remove("transparent");
+      }
     });
-
+  
     nextBtn?.addEventListener("click", () => {
       const nextIndex = currentVideoIndex + 1;
       if (nextIndex < currentVideos.length) {
         renderPlayer(currentVideos[nextIndex], nextIndex);
       }
     });
-
+  
     prevBtn?.addEventListener("click", () => {
       const prevIndex = currentVideoIndex - 1;
       if (prevIndex >= 0) {
         renderPlayer(currentVideos[prevIndex], prevIndex);
       }
     });
-
+  
     setInterval(() => {
       if (ytPlayer && ytPlayer.getDuration) {
         const duration = ytPlayer.getDuration();
@@ -109,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }, 1000);
-
+  
     progressBar?.addEventListener("input", () => {
       const duration = ytPlayer.getDuration();
       if (duration) {
@@ -117,13 +158,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ytPlayer.seekTo(seekTime, true);
       }
     });
+  
     const volumeControl = document.getElementById("volume-control");
     if (volumeControl) {
       // Inicializa el volumen en 100 al cargar
       if (ytPlayer && ytPlayer.setVolume) {
         ytPlayer.setVolume(100);
       }
-
+  
       volumeControl.addEventListener("input", () => {
         const volumeValue = parseInt(volumeControl.value, 10);
         if (ytPlayer && ytPlayer.setVolume) {
@@ -132,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   };
-
+  
   const overlay = document.querySelector(".overlay-blocker");
 
 setTimeout(() => {
@@ -167,73 +209,69 @@ setTimeout(() => {
     currentVideoIndex = index;
 
     playerContainer.innerHTML = `
-  <div class="card-body">
-    <h6 class="card-title text-center mb-3" style="font-size: 1.2rem; font-weight: 600;">
-      ${video.title}
-    </h6>
+ <div class="d-flex player-layout-wrapper">
+  <div class="video-wrapper-half">
+    <iframe
+      id="youtube-player"
+      src="https://www.youtube.com/embed/${video.videoId}?autoplay=0&enablejsapi=1&controls=0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+    <div class="overlay-blocker"></div>
+  </div>
 
-    <div class="d-flex flex-column flex-md-row align-items-start gap-4">
-      <div class="video-wrapper flex-shrink-0" style="flex: 1;">
-        <iframe
-          id="youtube-player"
-          src="https://www.youtube.com/embed/${video.videoId}?autoplay=0&enablejsapi=1&controls=0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-        ></iframe>
-        <div class="overlay-blocker"></div>
+  <div class="player-controls-half d-flex flex-column align-items-center justify-content-between text-center">
+    <h6 class="mb-2 player-title">${video.title}</h6>
+
+    <div id="music-equalizer" style="width: 200px; max-width: 100%;"></div>
+
+    <div id="progress-bar-container" class="mt-2 w-100 px-2"></div>
+
+    <input
+      id="progress-bar"
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+      step="1"
+      class="form-range w-100"
+    />
+
+    <div class="d-flex justify-content-center align-items-center gap-4 custom-controls-horizontal mb-2 mt-3">
+      <!-- Controles de reproducción -->
+      <div class="d-flex gap-3 align-items-center">
+        <button id="btn-prev" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-skip-start-fill fs-4"></i>
+        </button>
+        <button id="btn-play" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-play-fill fs-4"></i>
+        </button>
+        <button id="btn-pause" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-pause-fill fs-4"></i>
+        </button>
+        <button id="btn-next" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-skip-end-fill fs-4"></i>
+        </button>
       </div>
 
-      <div class="d-flex flex-column align-items-center justify-content-between flex-grow-1 text-center">
-        <div id="music-equalizer" style="width: 200px; max-width: 100%;"></div>
-        <div id="progress-bar-container" class="mt-3"></div>
+      <!-- Volumen -->
+      <div class="volume-wrapper">
+        <i class="bi bi-volume-up volume-icon"></i>
         <input
-          id="progress-bar"
           type="range"
+          id="volume-control"
           min="0"
           max="100"
-          value="0"
+          value="100"
           step="1"
-          class="form-range w-100 mb-3"
-          style="max-width: 300px;"
+          class=" volume-slider"
         />
-
-        <div class="d-flex justify-content-center align-items-center gap-4 custom-controls-horizontal mb-2">
-          <!-- Controles de reproducción -->
-          <div class="d-flex gap-3 align-items-center">
-            <button id="btn-prev" class="btn btn-outline-light btn-sm">
-              <i class="bi bi-skip-start-fill fs-4"></i>
-            </button>
-            <button id="btn-play" class="btn btn-outline-light btn-sm">
-              <i class="bi bi-play-fill fs-4"></i>
-            </button>
-            <button id="btn-pause" class="btn btn-outline-light btn-sm">
-              <i class="bi bi-pause-fill fs-4"></i>
-            </button>
-            <button id="btn-next" class="btn btn-outline-light btn-sm">
-              <i class="bi bi-skip-end-fill fs-4"></i>
-            </button>
-          </div>
-
-          <!-- Control de volumen como ícono + slider oculto -->
-          <div class="volume-wrapper">
-            <i class="bi bi-volume-up volume-icon"></i>
-            <input
-              type="range"
-              id="volume-control"
-              min="0"
-              max="100"
-              value="100"
-              step="1"
-              class="form-range volume-slider"
-            />
-          </div>
-        </div>
       </div>
     </div>
   </div>
+</div>
+
 `;
-
-
     waitForYT();
     setupCustomControls();
   };

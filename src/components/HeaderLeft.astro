@@ -3,43 +3,54 @@
   id="navbar-left-color"
   style="height: 196vh;"
 >
-  <a href="/" class="pb-3 mb-3 text-white text-decoration-none text-center" style="width: 100%; margin-top: 6px">
+  <a
+    href="#"
+    class="pb-3 mb-3 text-white text-decoration-none text-center"
+    style="width: 100%; margin-top: 6px"
+  >
     <span class="fs-5 fw-bold" style="margin-left: -20px;">Steel Music</span>
   </a>
   <ul class="nav nav-pills flex-column w-100 mb-5">
     <li class="nav-item">
-      <a href="/dashboard/home" class="nav-link">
+      <a href="#home-music" class="nav-link nav-section">
         <i class="bi bi-house-door me-2"></i> Inicio
       </a>
     </li>
     <li>
-      <a href="/dashboard/favorites" class="nav-link">
+      <a href="#favorites-list" class="nav-link nav-section">
         <i class="bi bi-heart me-2"></i> Favoritos
       </a>
     </li>
     <li>
-      <a href="/dashboard/config" class="nav-link">
+      <a href="#play-list" class="nav-link nav-section">
         <i class="bi bi-music-note-list me-2"></i> Play List
       </a>
     </li>
     <li>
-      <a href="/dashboard/config" class="nav-link">
+      <a href="#artists-section" class="nav-link nav-section">
         <i class="bi bi-people me-2"></i> Artistas
       </a>
     </li>
     <li>
-      <a href="/dashboard/config" class="nav-link">
+      <a href="#recommended-section" class="nav-link nav-section">
         <i class="bi bi-stars me-2"></i> Recomendados
       </a>
     </li>
     <li>
-      <a href="/dashboard/config" class="nav-link">
+      <a href="#settings-section" class="nav-link nav-section">
         <i class="bi bi-gear-wide-connected me-2"></i> Configuración
       </a>
-    </li>  
+    </li>
   </ul>
 </div>
+<script is:inline type="module" src="/src/scripts/NavSectionSwitch.js"></script>
 <style>
+  .nav-link.active {
+  background-color: #ffffff33;
+  border-left: 3px solid #ffffff;
+  color: #fff !important;
+}
+
   #navbar-left-color {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
@@ -58,7 +69,7 @@
     margin-bottom: 10px;
   }
 
-    li:hover {
+  li:hover {
     background-color: #c9c9c9ca;
     border-radius: 6px;
   }
