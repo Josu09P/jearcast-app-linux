@@ -15,8 +15,14 @@ import BaseHead from "../../components/BaseHead.astro";
           <div class="card shadow-sm">
             <div class="card-body">
               <h2 class="card-title text-center mb-4">
-                 <img src="/src/assets/img/logo-v3.png" alt="" width="80" style="filter: brightness(0) invert(1); margin-bottom: 10px;">
-                 <br> Crear cuenta</h2>
+                <img
+                  src="/src/assets/img/logo-v3.png"
+                  alt=""
+                  width="80"
+                  style="filter: brightness(0) invert(1); margin-bottom: 10px;"
+                />
+                <br /> Crear cuenta
+              </h2>
               <form id="register-form">
                 <div class="mb-3">
                   <label for="name" class="form-label">Nombre completo</label>
@@ -36,7 +42,7 @@ import BaseHead from "../../components/BaseHead.astro";
                     type="email"
                     class="form-control"
                     id="email"
-                    placeholder="ejemplo@email.com"
+                    placeholder="jearcast@gmail.com .. debe estar asociado a google"
                     required
                   />
                 </div>
@@ -96,7 +102,7 @@ import BaseHead from "../../components/BaseHead.astro";
       </div>
     </div>
 
-    <script type="module" src="/src/scripts/RegisterUserScript.js"></script>
+    <script is:inline type="module" src="/src/scripts/RegisterUserScript.js"></script>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
@@ -117,6 +123,5 @@ import BaseHead from "../../components/BaseHead.astro";
     -webkit-backdrop-filter: blur(6px);
     color: white;
     padding: 15px;
-
   }
 </style>

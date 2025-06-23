@@ -43,7 +43,7 @@ import BaseHead from "../../components/BaseHead.astro";
               </form>
               <div class="text-center mt-3">
                 <small>¿Olvidaste tu contraseña?</small><br />
-                <a href="/auth/forgot-password" class="text-decoration-none">Recuperarla</a>
+                <a href="/auth/ForgotPasswordPage" class="text-decoration-none">Recuperarla</a>
               </div>
               <div class="text-center mt-3">
                 <small>¿No tienes cuenta?</small><br />
@@ -56,7 +56,7 @@ import BaseHead from "../../components/BaseHead.astro";
     </div>
 
     <!-- Scripts -->
-    <script type="module" src="/src/scripts/LoginUserScript.js"></script>
+    <script is:inline type="module" src="/src/scripts/LoginUserScript.js"></script>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

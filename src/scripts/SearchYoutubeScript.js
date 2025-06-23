@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let ytPlayer;
   let currentVideoIndex = 0;
   let currentVideos = [];
+  let isPaused = false; // Estado de pausa o reproducción
 
   const waitForYT = () => {
     if (window.YT && window.YT.Player) {
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
           onReady: () => {
             setupCustomControls();
             ytPlayer.playVideo();
+            isPaused = false; // Inicia reproduciendo
             const equalizer = document.getElementById("music-equalizer");
             if (equalizer && !equalizer.querySelector("svg")) {
               const lottieAnimation = Lottie.loadAnimation({
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 renderer: "svg",
                 loop: true,
                 autoplay: true,
-                path: "/src/assets/animations/animation-sound.json",
+                path: "/src/assets/animations/animation-sound2.json",
               });
 
               window.lottieEqualizer = lottieAnimation;
@@ -39,14 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
               playBtn?.addEventListener("click", () => {
                 ytPlayer.playVideo();
+                isPaused = false;
                 equalizer.classList.remove("d-none");
                 lottieAnimation.play();
+
+                // Al reproducir, después de 10s hacer transparente
+                setTimeout(() => {
+                  if (overlay) {
+                    overlay.classList.add("transparent");
+                  }
+                }, 10000);
               });
 
               pauseBtn?.addEventListener("click", () => {
                 ytPlayer.pauseVideo();
+                isPaused = true;
                 equalizer.classList.add("d-none");
-                lottieAnimation.stop();
+
+                // Al pausar, hacer overlay opaco de inmediato
+                if (overlay) {
+                  overlay.classList.remove("transparent");
+                }
               });
             }
           },
@@ -55,9 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
               const nextIndex = currentVideoIndex + 1;
               if (nextIndex < currentVideos.length) {
                 renderPlayer(currentVideos[nextIndex], nextIndex);
+                isPaused = false; // Video nuevo, estado reproducido
               } else {
+                isPaused = true; // Video terminó
                 const equalizer = document.getElementById("music-equalizer");
                 equalizer?.classList.add("d-none");
+                if (overlay) overlay.classList.remove("transparent");
               }
             }
           },
@@ -68,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-    const setupCustomControls = () => {
+  const setupCustomControls = () => {
     const playBtn = document.getElementById("btn-play");
     const pauseBtn = document.getElementById("btn-pause");
     const nextBtn = document.getElementById("btn-next");
@@ -76,71 +94,73 @@ document.addEventListener("DOMContentLoaded", () => {
     const progressBar = document.getElementById("progress-bar");
     const equalizer = document.getElementById("music-equalizer");
     const overlay = document.querySelector(".overlay-blocker");
-  
+
     let fadeCheckInterval;
-  
+
     const checkOverlayFade = () => {
+      if (isPaused) {
+        // No cambiar overlay si está pausado
+        return;
+      }
+
       if (!ytPlayer || typeof ytPlayer.getCurrentTime !== "function") return;
-  
+
       const currentTime = ytPlayer.getCurrentTime();
       const duration = ytPlayer.getDuration();
-  
+
       if (!duration || duration === 0) return;
-  
-      // Mostrar oscuro hasta los 7 segundos
+
       if (currentTime <= 7) {
         overlay?.classList.remove("transparent");
-      }
-  
-      // Aclarar desde los 7 segundos hasta faltando 17
-      if (currentTime > 7 && currentTime < duration - 17) {
+      } else if (currentTime > 7 && currentTime < duration - 17) {
         overlay?.classList.add("transparent");
-      }
-  
-      // Volver a oscurecer cuando faltan 17 segundos
-      if (currentTime >= duration - 17) {
+      } else if (currentTime >= duration - 17) {
         overlay?.classList.remove("transparent");
       }
     };
-  
+
     fadeCheckInterval = setInterval(checkOverlayFade, 1000);
-  
+
     playBtn?.addEventListener("click", () => {
       ytPlayer.playVideo();
+      isPaused = false;
       equalizer?.classList.remove("d-none");
-  
+
       // Cuando se reproduce, espera 10 segundos antes de hacer el overlay transparente
       setTimeout(() => {
         if (overlay) {
           overlay.classList.add("transparent");
         }
-      }, 10000); // 10 segundos
+      }, 10000);
     });
-  
+
     pauseBtn?.addEventListener("click", () => {
       ytPlayer.pauseVideo();
+      isPaused = true;
       equalizer?.classList.add("d-none");
-  
+
       // Cuando se pausa, haz el overlay visible de inmediato
       if (overlay) {
         overlay.classList.remove("transparent");
       }
     });
-  
+
     nextBtn?.addEventListener("click", () => {
       const nextIndex = currentVideoIndex + 1;
       if (nextIndex < currentVideos.length) {
         renderPlayer(currentVideos[nextIndex], nextIndex);
+        isPaused = false;
       }
     });
-  
+
     prevBtn?.addEventListener("click", () => {
       const prevIndex = currentVideoIndex - 1;
       if (prevIndex >= 0) {
         renderPlayer(currentVideos[prevIndex], prevIndex);
+        isPaused = false;
       }
     });
-  
+
     setInterval(() => {
       if (ytPlayer && ytPlayer.getDuration) {
         const duration = ytPlayer.getDuration();
@@ -150,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }, 1000);
-  
+
     progressBar?.addEventListener("input", () => {
       const duration = ytPlayer.getDuration();
       if (duration) {
@@ -158,14 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ytPlayer.seekTo(seekTime, true);
       }
     });
-  
+
     const volumeControl = document.getElementById("volume-control");
     if (volumeControl) {
       // Inicializa el volumen en 100 al cargar
       if (ytPlayer && ytPlayer.setVolume) {
         ytPlayer.setVolume(100);
       }
-  
+
       volumeControl.addEventListener("input", () => {
         const volumeValue = parseInt(volumeControl.value, 10);
         if (ytPlayer && ytPlayer.setVolume) {
@@ -174,14 +194,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   };
-  
+
   const overlay = document.querySelector(".overlay-blocker");
 
-setTimeout(() => {
-  if (overlay) {
-    overlay.classList.add("fade-out");
-  }
-}, 8000); // 8 segundos
+  setTimeout(() => {
+    if (overlay) {
+      overlay.classList.add("fade-out");
+    }
+  }, 8000); // 8 segundos
 
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";

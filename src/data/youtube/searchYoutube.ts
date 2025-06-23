@@ -1,5 +1,4 @@
-// src/data/youtube/searchYoutube.ts
-
+//USE APIKEY FOR SEARCH
 export const searchYoutube = async (query: string, apiKey: string) => {
   const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${encodeURIComponent(query)}&part=snippet&type=video&maxResults=12`;
 
@@ -13,7 +12,7 @@ export const searchYoutube = async (query: string, apiKey: string) => {
 }));
 
 };
-
+ 
 export const getVideoStats = async (videoIds: string, apiKey: string) => {
   const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${apiKey}`;
 

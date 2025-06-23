@@ -4,6 +4,8 @@ import FavoritesList from "../../components/views/favorites/FavoritesList.astro"
 import PlayList from "../../components/views/play-list/PlayList.astro";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import "/src/assets/css/global.css";
+import ConfThemes from "../../components/views/config/conf-themes.astro";
+import RecommendedList from "../../components/views/recommended-list/RecommendedList.astro";
 ---
 <DashboardLayout>
   <!--===========================================-->
@@ -19,8 +21,16 @@ import "/src/assets/css/global.css";
     <PlayList />
   </section>
   <!--===========================================-->
-    <section class="section-local-music" id="local-music">
+  <section id="recommended-list" style="display: none;">
+    <RecommendedList />
+  </section>
+  <!--===========================================-->
+  <section id="local-music" style="display: none;">
     <PlayList />
+  </section>
+  <!--===========================================-->
+  <section id="config-theme" style="display: none;">
+    <ConfThemes />
   </section>
   <!--===========================================-->
 </DashboardLayout>

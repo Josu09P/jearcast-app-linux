@@ -1,0 +1,15 @@
+<div class="container mx-auto p-4">
+  <h5 class="text-2xl font-bold mb-2"  style="color: rgb(229, 229, 229);">Playlists Recomendadas</h5>
+   <p class="mb-4" style="color: rgb(229, 229, 229);">
+    JearCastApp te recomienda estas playlists.
+  </p>
+
+  <!-- Contenedor de playlists recomendadas -->
+  <div id="recommendedPlaylistContainer" class="d-flex flex-column gap-3 mb-4"></div>
+  <div id="player-recommended-container" class="text-white p-4 rounded shadow mt-4 container-player-jear"></div>
+  <br>
+  <!-- Contenedor de canciones (cambia dinámicamente al hacer clic en una playlist) -->
+  <div id="recommendedSongsContainer" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"></div>
+</div>
+<!-- Script que maneja el renderizado -->
+<script is:inline type="module" src="/src/scripts/ListRecommendedPlaylists.js"></script>

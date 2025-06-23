@@ -1,5 +1,4 @@
 ---
-// En tu archivo .astro principal del dashboard
 import BaseHead from "../components/BaseHead.astro";
 import FooterDashboard from "../components/FooterDashboard.astro";
 import HeaderLeft from "../components/HeaderLeft.astro";
@@ -32,7 +31,11 @@ import "/src/assets/css/global.css";
         </div>
       </div>
     </div>
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script is:inline type="module">
+     import { loadColorTheme } from '/src/scripts/themes/theme-script.js';
+     window.addEventListener('DOMContentLoaded', loadColorTheme);
+   </script>
   </body>
 </html>
 <style>
@@ -42,13 +45,15 @@ import "/src/assets/css/global.css";
   }
 
   body {
-    background-color: #102c4a;
+    --main-bg-color: #102c4a; /* value in var */
+    background-color: var(--main-bg-color);
     background-image: url("/src/assets/img/bg-hero.png");
     background-repeat: no-repeat;
-    background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-    background-position: center; /* Centra la imagen */
-    background-attachment: fixed; /* Opcional: fija la imagen de fondo al viewport */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
+
   #navbar-left-color a {
     color: black !important;
   }

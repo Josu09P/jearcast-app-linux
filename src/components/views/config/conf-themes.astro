@@ -1,0 +1,49 @@
+<div class="theme-selector-container card text-white p-4 rounded">
+  <h5 class="mb-3">🎨 Personaliza el color JearCastApp</h5>
+  <div class="d-flex flex-wrap gap-3">
+    <!-- Colores predeterminados -->
+    <button class="theme-color" data-color="#102c4a" style="background-color: #102c4a;"></button>
+    <button class="theme-color" data-color="#1d3557" style="background-color: #1d3557;"></button>
+    <button class="theme-color" data-color="#ff6b6b" style="background-color: #ff6b6b;"></button>
+    <button class="theme-color" data-color="#00b894" style="background-color: #00b894;"></button>
+    <button class="theme-color" data-color="#fdcb6e" style="background-color: #fdcb6e;"></button>
+
+    <!-- Color personalizado -->
+    <label class="theme-color custom-picker">
+      <input type="color" id="customColorPicker" hidden />
+      <span style="display: inline-block; width: 32px; height: 32px; background: linear-gradient(to bottom right, #ccc, #999); border-radius: 8px;"></span>
+    </label>
+  </div>
+
+  <div id="theme-selected-check" class="mt-3 text-success d-none">
+     ¡Color actualizado!
+  </div>
+ </div>
+ <script is:inline type="module">
+   import { initThemeSelector } from '/src/scripts/themes/theme-script.js';
+   window.addEventListener('DOMContentLoaded', initThemeSelector);
+ </script>
+ <style>
+  .theme-color {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+  }
+
+  .theme-color.selected {
+    border: 2px solid #fff;
+  }
+
+  .custom-picker {
+    cursor: pointer;
+  }
+
+  .custom-picker span {
+    border: 2px dashed #ccc;
+  }
+</style>
+

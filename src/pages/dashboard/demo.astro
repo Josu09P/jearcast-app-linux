@@ -1,0 +1,52 @@
+---
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+---
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Buscar canciones para recomendadas</title>
+  </head>
+  <body class="bg-dark text-light">
+    <main class="container py-4">
+      <h2 class="text-center mb-4">Buscador para Playlists Recomendadas</h2>
+
+      <form role="search" class="mb-4">
+        <div class="input-group">
+          <input id="search-input" type="text" class="form-control" placeholder="Buscar canciones..." required />
+          <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+
+      <h5 id="search-title" class="text-light d-none mb-3"></h5>
+
+      <div id="player-container" class="mb-4"></div>
+
+      <div class="row" id="youtube-results"></div>
+    </main>
+    <div class="container py-4">
+  <!-- Modal -->
+  <div class="modal fade" id="recommendModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title">Selecciona o crea playlist recomendada</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="recommendPlaylistList" class="mb-3"></div>
+          <input id="recommendNameInput" type="text" class="form-control" placeholder="Nombre playlist">
+        </div>
+        <div class="modal-footer">
+          <button id="confirmAddRecommend" type="button" class="btn btn-primary">Añadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script is:inline type="module" src="/src/scripts/youtubeRecommenderSearch.js"></script>
+  </body>
+</html>
